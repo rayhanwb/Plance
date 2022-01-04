@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class CreateTask extends AppCompatActivity {
+public class EditTask extends AppCompatActivity {
     protected Cursor cursor;
     DataHelper dbhelper;
     Button ton1, ton2;
@@ -30,7 +30,7 @@ public class CreateTask extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_task);
+        setContentView(R.layout.activity_edit_task);
 
         dbhelper = new DataHelper(this);
         text1 = (EditText) findViewById(R.id.titleForm);
@@ -38,6 +38,20 @@ public class CreateTask extends AppCompatActivity {
         text3 = (EditText) findViewById(R.id.dateForm);
         ton1 = (Button) findViewById(R.id.button);
         ton2 = (Button) findViewById(R.id.button2);
+
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        cursor = db.rawQuery("SELECT * FROM tasks WHERE title ='"+
+                getIntent().getStringExtra("title") + "'", null);
+        cursor.moveToFirst();
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToPosition(0);
+            text1.setText(cursor.getString(2).toString());
+            text3.setText(cursor.getString(4).toString());
+            if (cursor.getString(3) != null) {
+                text2.setText(cursor.getString(3).toString());
+            }
+        }
 
         text3.setInputType(InputType.TYPE_NULL);
         text3.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +62,7 @@ public class CreateTask extends AppCompatActivity {
                 int month = cldr.get(Calendar.MONTH);
                 int year = cldr.get(Calendar.YEAR);
 
-                picker = new DatePickerDialog(CreateTask.this, new DatePickerDialog.OnDateSetListener() {
+                picker = new DatePickerDialog(EditTask.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                         datePicked = i2 + "/" + (i1+1) + "/" + i;
@@ -63,11 +77,12 @@ public class CreateTask extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SQLiteDatabase db = dbhelper.getWritableDatabase();
-                db.execSQL("INSERT INTO tasks(user_id, date, title, desc) values('1','"+
-                        datePicked + "','" +
-                        text1.getText().toString() + "','" +
-                        text2.getText().toString() + "')");
-                Toast.makeText(getApplicationContext(), "New Task Added", Toast.LENGTH_LONG).show();
+                db.execSQL("UPDATE tasks SET title='"+
+                        text1.getText().toString() + "', desc='" +
+                        text2.getText().toString() + "', date='" +
+                        text3.getText().toString() + "' WHERE id='" +
+                        cursor.getString(0).toString() + "'");
+                Toast.makeText(getApplicationContext(), "Task Updated", Toast.LENGTH_LONG).show();
                 Task.ma.RefreshList();
                 finish();
             }

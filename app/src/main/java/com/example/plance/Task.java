@@ -88,9 +88,9 @@ public class Task extends AppCompatActivity {
         ListViewer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView arg0, View arg1, int arg2, long arg3) {
                 final String selection = list[arg2];
-                final CharSequence[] dialogitem = {"Lihat Biodata", "Update Biodata", "Hapus Biodata"};
+                final CharSequence[] dialogitem = {"See Task Detail", "Edit Task", "Delete Task"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(Task.this);
-                builder.setTitle("Pilih");
+                builder.setTitle("Task: " + selection);
                 builder.setItems(dialogitem, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         switch (item) {
@@ -102,15 +102,30 @@ public class Task extends AppCompatActivity {
                                 break;
                             // Update
                             case 1:
-//                                Intent update = new Intent(getApplicationContext(), UpdateBiodataActivity.class);
-//                                startActivity(update);
-//                                update.putExtra("title", selection);
+                                Intent update = new Intent(getApplicationContext(), EditTask.class);
+                                update.putExtra("title", selection);
+                                startActivity(update);
                                 break;
                             // Hapus
                             case 2:
-                                SQLiteDatabase db = dbcenter.getWritableDatabase();
-                                db.execSQL("DELETE FROM tasks WHERE title ='" + selection + "'");
-                                RefreshList();
+                                final CharSequence[] deleteItem = {"Yes", "No"};
+                                AlertDialog.Builder deleteAlert = new AlertDialog.Builder(Task.this);
+                                deleteAlert.setTitle("Are you sure want to delete?");
+                                deleteAlert.setItems(deleteItem, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        switch (i) {
+                                            case 0:
+                                                SQLiteDatabase db = dbcenter.getWritableDatabase();
+                                                db.execSQL("DELETE FROM tasks WHERE title ='" + selection + "'");
+                                                RefreshList();
+                                                break;
+                                            case 1:
+                                                break;
+                                        }
+                                    }
+                                });
+                                deleteAlert.create().show();
                                 break;
                         }
                     }

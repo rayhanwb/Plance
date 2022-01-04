@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Plance">
         <activity
+            android:name=".EditTask"
+            android:exported="true" />
+        <activity
             android:name=".CreateTask"
             android:exported="true" />
         <activity
