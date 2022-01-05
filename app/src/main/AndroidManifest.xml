@@ -10,6 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Plance">
         <activity
+            android:name=".FinanceCreateSubActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FinanceSubActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FinanceSubAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FinanceMainEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FinanceMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FinanceHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditTask"
             android:exported="true" />
         <activity
