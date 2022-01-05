@@ -16,10 +16,10 @@ public class DataHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 //        String sql = "CREATE TABLE biodata(no integer PRIMARY KEY, nama text NULL, tgl text NULL, jk text NULL, alamat text NULL)";
         String sql;
-        sql = "CREATE TABLE user(id integer PRIMARY KEY AUTOINCREMENT, name text NOT NULL, comp_name" +
-                " text, email text NOT NULL, password text NOT NULL)";
-        Log.d("Data", "onCreate"+sql);
-        db.execSQL(sql);
+//        sql = "DROP TABLE user";
+//        Log.d("Data", "onCreate"+sql);
+//        db.execSQL(sql);
+
 
         sql = "CREATE TABLE tasks(id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL," +
                 " title text NOT NULL, desc text, date text NOT NULL, isdone integer DEFAULT 0 NOT NULL)";
@@ -33,7 +33,16 @@ public class DataHelper extends SQLiteOpenHelper {
         Log.d("Data", "onCreate"+sql);
         db.execSQL(sql);
 
-        sql = "INSERT INTO tasks(user_id, title, date) VALUES('1', 'Percobaan', datetime('now'))";
+//        sql = "INSERT INTO tasks(user_id, title, date) VALUES('1', 'Percobaan', datetime('now'))";
+//        Log.d("Data", "onCreate"+sql);
+//        db.execSQL(sql);
+
+//        sql = "INSERT INTO user(id, name, comp_name, is_loggedin) VALUES('1', 'Mahasiswa', 'Toko Maju Jaya', '1')";
+//        Log.d("Data", "onCreate"+sql);
+//        db.execSQL(sql);
+
+        sql = "CREATE TABLE users(id integer PRIMARY KEY AUTOINCREMENT, name text NOT NULL, comp_name" +
+                " text, is_loggedin integer)";
         Log.d("Data", "onCreate"+sql);
         db.execSQL(sql);
     }
