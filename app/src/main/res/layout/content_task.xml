@@ -11,15 +11,9 @@
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< Updated upstream
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
-=======
         android:fontFamily="@font/poppins_semibold"
         android:textSize="24sp"
         android:layout_margin="0dp"/>
->>>>>>> Stashed changes
 
 
 </RelativeLayout>
