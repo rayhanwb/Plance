@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.plance">
+    package="com.fizray.plance">
 
     <application
         android:allowBackup="true"
@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Plance">
         <activity
+<<<<<<< HEAD
             android:name=".FinanceCreateSubActivity"
             android:exported="false" />
         <activity
@@ -30,50 +31,27 @@
         <activity
             android:name=".EditTask"
             android:exported="true" />
+=======
+            android:name=".UpdateActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+>>>>>>> parent of bcf97e3 (Merge pull request #1 from rayhanwb/BranchProject)
         <activity
-            android:name=".CreateTask"
-            android:exported="true" />
-        <activity
-            android:name=".TaskDetail"
-            android:exported="true" />
-        <activity
-            android:name=".Task"
-            android:exported="true"
-            android:theme="@style/Theme.Plance.NoActionBar" />
-        <activity
-            android:name=".Home"
-            android:exported="true" />
-        <activity
-            android:name=".SignUp"
-            android:exported="true" />
-        <activity
-            android:name=".SignIn"
-            android:exported="true" />
-        <activity
-            android:name=".ThirdFeature"
-            android:exported="true" />
-        <activity
-            android:name=".SecondFeature"
-            android:exported="true" />
-        <activity
-            android:name=".FirstFeature"
-            android:exported="true" />
-        <activity
-            android:name=".Welcome"
-            android:exported="true" />
+            android:name=".AddActivity"
+            android:exported="false"
+            android:label="Add Book"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="Book Library">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
